@@ -11,6 +11,8 @@ sudo npm install -g pm2
 #start TodoList app as a service
 cd /vagrant
 pm2 start ecosystem.config.js
+#wait for service start
+sleep 5
 #seed tasks
 curl -X POST \
   http://localhost:3000/tasks \
