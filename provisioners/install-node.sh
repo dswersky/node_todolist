@@ -6,13 +6,20 @@ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 sudo apt-get update
 #install NodeJS
 sudo apt-get install -y nodejs
-#install PM2 to support run-as-service
+#install PM2 to support NodeJS application run-as-service
 sudo npm install -g pm2
 #start TodoList app as a service
 cd /vagrant
-pm2 start ecosystem.config.js
+npm install --no-bin-links        #restore application dependencies
+pm2 start ecosystem.config.js     #start the application with PM2
+pm2 save                          #save the current config for restarts
+pm2 startup                       #enable PM2 startup system
+#add PM2 configuration to systemd to restart application on reboot
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp /home/vagrant
 #wait for service start
-sleep 5
+while ! nc -z localhost 3000; do   
+  sleep 0.1 # wait for 1/10 of the second before the next check
+done
 #seed tasks
 curl -X POST \
   http://localhost:3000/tasks \

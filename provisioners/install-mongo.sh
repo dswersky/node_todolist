@@ -9,4 +9,5 @@ sudo apt-get update
 #install Mongo
 sudo apt-get install -y mongodb-org
 #start mongo
+systemctl enable mongod.service
 sudo service mongod start

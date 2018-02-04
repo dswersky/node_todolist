@@ -29,6 +29,14 @@ exports.read_a_task = function(req, res) {
   });
 };
 
+// exports.read_by_status = function(req, res) {
+//   Task.find({status: req.params.status}, function(err, task) {
+//     if (err)
+//       res.send(err);
+//     res.json(task);
+//   });
+// };
+
 exports.update_a_task = function(req, res) {
   Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
     if (err)
@@ -45,4 +53,6 @@ exports.delete_a_task = function(req, res) {
       res.send(err);
     res.json({ message: 'Task successfully deleted' });
   });
+
+
 };

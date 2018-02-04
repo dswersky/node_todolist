@@ -7,6 +7,7 @@ var express = require('express'),
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Tododb');
+process.send = process.send || function () {};
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ var routes = require('./api/routes/todoListRoutes');
 routes(app);
 
 app.use(function(req, res) {
-    res.status(404).send({url: req.originalUrl + ' not found!!!!'})
+    res.status(404).send({url: req.originalUrl + ' not found'})
   });
 
 app.listen(port);
