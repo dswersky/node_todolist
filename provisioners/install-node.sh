@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #nodesource PPA
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 #update package database
 sudo apt-get update
 #install NodeJS
